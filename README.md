@@ -17,7 +17,7 @@ A digital mindfulness companion that helps Muslims stay grounded, practice grati
 - LocalStorage API
 
 ## 🚀 Live Demo
-[View Live](https://[validivar].github.io/sakinah-compass)
+[View Live](https://sakinah-compass.vercel.app/)
 
 
 
