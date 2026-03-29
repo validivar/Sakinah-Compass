@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sakinah Compass | Mindful Remembrance</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Noto Naskh Arabic', 'Amiri', sans-serif;
+            background: linear-gradient(145deg, #f8f9fc 0%, #eef2f5 100%);
+            color: #1e2a3e;
+            line-height: 1.5;
+            padding: 1rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem 3rem;
+        }
+
+        /* Header & Branding */
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            background: rgba(46, 125, 50, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 60px;
+        }
+
+        h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #1f5e3a, #2c7a4b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-top: 0.5rem;
+        }
+
+        .arabic {
+            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+            font-size: 1.8rem;
+            line-height: 1.4;
+            color: #2c3e2f;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .verse-ref {
+            font-size: 0.9rem;
+            color: #4b6b3e;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        /* Card Style */
+        .card {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(2px);
+            border-radius: 32px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.02);
+            padding: 1.8rem;
+            margin-bottom: 1.8rem;
+            border: 1px solid rgba(72, 128, 72, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .card h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-left: 4px solid #2e7d32;
+            padding-left: 1rem;
+        }
+
+        /* Reflection prompt */
+        .reflection-box {
+            background: #fef9e6;
+            border-radius: 24px;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border-left: 5px solid #ffb74d;
+        }
+
+        .time-greeting {
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Tracker (gratitude / reliance log) */
+        .tracker-input {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.2rem 0;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border-radius: 24px;
+            border: 1px solid #cfdfc7;
+            font-family: inherit;
+            font-size: 1rem;
+            background: white;
+            resize: vertical;
+        }
+
+        button {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        button:hover {
+            background: #1b5e20;
+            transform: scale(0.98);
+        }
+
+        .entry-list {
+            margin-top: 1.2rem;
+            list-style: none;
+        }
+
+        .entry-list li {
+            background: #ffffffcc;
+            border-radius: 20px;
+            padding: 0.8rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+            border: 1px solid #e0f0dd;
+        }
+
+        /* Footer */
+        .footer-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #5f6c5b;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #cde2cd;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 0.8rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .arabic {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="logo">🧭✨</div>
+        <h1>Sakinah Compass</h1>
+        <div class="arabic">أَلَا بِذِكْرِ ٱللَّهِ تَطْمَئِنُّ ٱلْقُلُوبُ</div>
+        <div class="verse-ref">Surah Ar-Ra‘d 13:28 — “Verily, in the remembrance of Allah do hearts find rest.”</div>
+    </div>
+
+    <!-- Daily Reflection Card (time-aware) -->
+    <div class="card">
+        <h2>🌿 Today’s Tawfiq Reminder</h2>
+        <div class="reflection-box" id="reflectionBox">
+            <div class="time-greeting" id="greetingMsg">Loading...</div>
+            <p id="dailyPrompt">Reflect on a moment today where you felt reliant on Allah.</p>
+        </div>
+        <p style="font-size:0.85rem; margin-top:0.5rem;"><strong>Inspiration:</strong> This verse grounds the project — remembrance brings tranquility. Use this space to check in with your heart.</p>
+    </div>
+
+    <!-- Tawfiq Tracker: Gratitude & Reliance Log -->
+    <div class="card">
+        <h2>📝 Tawfiq Tracker</h2>
+        <p>Write a short note: a moment you remembered Allah, a blessing you recognized, or a challenge you entrusted to Him.</p>
+        <div class="tracker-input">
+            <textarea id="entryText" rows="2" placeholder="e.g., Today I felt overwhelmed, but I remembered Allah’s plan is best. Alhamdulillah..."></textarea>
+            <button id="saveEntryBtn">✍️ Log Moment of Remembrance</button>
+        </div>
+        <div>
+            <h3 style="font-size:1.2rem; margin-bottom:0.5rem;">📖 Your Journal</h3>
+            <ul class="entry-list" id="entryList">
+                <li style="opacity:0.7;">✨ No entries yet. Start by logging a reflection.</li>
+            </ul>
+            <button id="clearBtn" style="background:#9e9e9e; margin-top:0.5rem;">Clear All Entries</button>
+        </div>
+    </div>
+
+    <!-- Small Dua / Action Reminder -->
+    <div class="card">
+        <h2>🤲 Moment of Dua</h2>
+        <p><em>“O Allah, grant me tawfiq to remain mindful of You, and let my heart find peace in Your remembrance.”</em></p>
+        <button id="duaBtn" style="background:#5d4037;">💚 Make a sincere intention</button>
+        <p id="duaFeedback" style="margin-top: 0.8rem; font-size:0.85rem; color:#2c5e2e;"></p>
+    </div>
+
+    <div class="footer-note">
+        🧭 Sakinah Compass — Built with barakah for MSA Hacks 2025. Grounded in Surah Ar-Ra‘d (13:28). <br>
+        Reminder: true tawfiq comes from Allah. This tool helps us pause and reflect.
+    </div>
+</div>
+
+<script>
+    // ---------- Time-aware greeting & reflection prompt ----------
+    function updateGreetingAndPrompt() {
+        const hour = new Date().getHours();
+        let greeting = "";
+        let prompt = "";
+        if (hour >= 5 && hour < 12) {
+            greeting = "☀️ Sabah al-khayr! Good morning.";
+            prompt = "What is one blessing you’re grateful for this morning? How can you remember Allah in the next few hours?";
+        } else if (hour >= 12 && hour < 18) {
+            greeting = "🌤️ Good afternoon. Take a deep breath.";
+            prompt = "Midday check-in: Have you taken a moment for dhikr? How has Allah’s help shown up today?";
+        } else if (hour >= 18 && hour < 22) {
+            greeting = "🌙 Evening peace. Alhamdulillah for this day.";
+            prompt = "Reflect on today: When did your heart feel at ease through remembrance?";
+        } else {
+            greeting = "🌌 Nighttime stillness. Let your heart rest in Allah’s mercy.";
+            prompt = "Before sleep, remember a difficulty you entrusted to Allah. Find tranquility in tawakkul.";
+        }
+        document.getElementById("greetingMsg").innerHTML = greeting;
+        document.getElementById("dailyPrompt").innerHTML = prompt;
+    }
+    updateGreetingAndPrompt();
+
+    // ---------- LocalStorage for Tawfiq Tracker (journal entries) ----------
+    let entries = [];
+
+    function loadEntries() {
+        const stored = localStorage.getItem("sakinahEntries");
+        if (stored) {
+            entries = JSON.parse(stored);
+        } else {
+            entries = [];
+        }
+        renderEntries();
+    }
+
+    function renderEntries() {
+        const listEl = document.getElementById("entryList");
+        if (!entries.length) {
+            listEl.innerHTML = '<li style="opacity:0.7;">✨ No entries yet. Start by logging a reflection.</li>';
+            return;
+        }
+        listEl.innerHTML = "";
+        // show latest first
+        [...entries].reverse().forEach((entry, idx) => {
+            const li = document.createElement("li");
+            li.innerHTML = `<strong>🕊️ ${entry.timestamp}</strong><br>${escapeHtml(entry.text)}`;
+            listEl.appendChild(li);
+        });
+    }
+
+    function saveEntry(text) {
+        if (!text.trim()) {
+            alert("Please write something before logging.");
+            return false;
+        }
+        const now = new Date();
+        const formattedTime = now.toLocaleString(undefined, { hour: '2-digit', minute:'2-digit', month:'short', day:'numeric' });
+        entries.push({
+            text: text.trim(),
+            timestamp: formattedTime
+        });
+        localStorage.setItem("sakinahEntries", JSON.stringify(entries));
+        renderEntries();
+        return true;
+    }
+
+    function clearAllEntries() {
+        if (confirm("Are you sure you want to delete all your reflections?")) {
+            entries = [];
+            localStorage.removeItem("sakinahEntries");
+            renderEntries();
+        }
+    }
+
+    // helper to avoid XSS (though entries are safe, but good practice)
+    function escapeHtml(str) {
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+            return c;
+        });
+    }
+
+    // Event listeners for the tracker
+    document.getElementById("saveEntryBtn").addEventListener("click", () => {
+        const textarea = document.getElementById("entryText");
+        const text = textarea.value;
+        if (saveEntry(text)) {
+            textarea.value = ""; // clear after successful save
+            // Provide feedback
+            const feedbackMsg = document.getElementById("duaFeedback");
+            feedbackMsg.innerHTML = "✅ Reflection logged. May Allah accept your remembrance.";
+            setTimeout(() => {
+                if (feedbackMsg.innerHTML === "✅ Reflection logged. May Allah accept your remembrance.") 
+                    feedbackMsg.innerHTML = "";
+            }, 2500);
+        }
+    });
+
+    document.getElementById("clearBtn").addEventListener("click", clearAllEntries);
+
+    // Dua button interaction (just a gentle nudge)
+    document.getElementById("duaBtn").addEventListener("click", () => {
+        const duaFeedback = document.getElementById("duaFeedback");
+        duaFeedback.innerHTML = "💚 Ameen. ‘And remember your Lord within yourself in humility and in fear.’ — May your heart find sakinah.";
+        setTimeout(() => {
+            if (duaFeedback.innerHTML === "💚 Ameen. ‘And remember your Lord within yourself in humility and in fear.’ — May your heart find sakinah.") {
+                setTimeout(() => { duaFeedback.innerHTML = ""; }, 2000);
+            }
+        }, 3000);
+    });
+
+    loadEntries();
+
+    // optional: set background based on time?
+    function updateSoftBackground() {
+        const hour = new Date().getHours();
+        let gradient = "";
+        if (hour < 12) gradient = "linear-gradient(145deg, #f5f9f0 0%, #e6f0e8 100%)";
+        else if (hour < 18) gradient = "linear-gradient(145deg, #fff7eb 0%, #f4ede4 100%)";
+        else gradient = "linear-gradient(145deg, #e9f0f5 0%, #dde4ec 100%)";
+        document.body.style.background = gradient;
+    }
+    updateSoftBackground();
+</script>
+</body>
+</html>
