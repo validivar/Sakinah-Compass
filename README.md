@@ -17,10 +17,9 @@ A digital mindfulness companion that helps Muslims stay grounded, practice grati
 - LocalStorage API
 
 ## 🚀 Live Demo
-[View Live](https://[username].github.io/sakinah-compass)
+[View Live](https://[validivar].github.io/sakinah-compass)
 
-## 📹 Video Walkthrough
-[Watch on YouTube](https://youtu.be/...)
+
 
 ## 🤲 Inspiration
 Built for MSA Hacks 2025 — rooted in the theme of Tawfiq: staying grounded, mindful, and reliant on Allah.
